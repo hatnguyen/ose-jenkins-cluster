@@ -6,6 +6,8 @@ ENV HOME /opt/jenkins-slave
 ENV MAVEN_VERSION 3.3.3
 ENV JAVA_HOME /usr/lib/jvm/java
 
+RUN yum repolist all
+curl -kv www.google.com
 RUN yum update -y
 RUN yum install -y java-1.8.0-openjdk-devel
 RUN yum install -y tar
