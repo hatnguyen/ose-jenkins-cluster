@@ -8,13 +8,13 @@ ENV JAVA_HOME /usr/lib/jvm/java
 
 RUN yum repolist all
 RUN yum repolist
-RUN "yum install -y git tar zip unzip which java-1.8.0-openjdk-devel"
-RUN "yum clean all"
-RUN "useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave"
-RUN "mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins"
-RUN "curl -fsSL http://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz | tar xzf - -C /usr/share"
-RUN "mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven"
-RUN "ln -s /usr/share/maven/bin/mvn /usr/bin/mvn"
+RUN yum install -y git tar zip unzip which java-1.8.0-openjdk-devel
+RUN yum clean all
+RUN useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave
+RUN mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins
+RUN curl -fsSL http://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz | tar xzf - -C /usr/share
+RUN mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven
+RUN ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 # Copy script
 COPY jenkins-slave.sh /opt/jenkins-slave/bin/
