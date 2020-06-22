@@ -1,15 +1,5 @@
-FROM registry.access.redhat.com/rhel7/rhel
+FROM centos:7
 
-
-RUN rm /etc/rhsm-host && \
-    yum repolist --disablerepo=* && \
-    subscription-manager repos --enable rhel-7-server-ansible-2.9-rpms && \
-    yum -y update && \
-    yum -y install ansible && \
-    rm -rf /etc/pki/entitlement
-    
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git tar zip unzip which java-1.8.0-openjdk-devel && \
-    yum clean all 
 
 ENV JENKINS_SWARM_VERSION 2.0
 ENV JNLP_SLAVE_VERSION 2.52
@@ -17,7 +7,11 @@ ENV HOME /opt/jenkins-slave
 ENV MAVEN_VERSION 3.3.3
 ENV JAVA_HOME /usr/lib/jvm/java
 
-RUN useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave && \
+RUN yum repolist all
+RUN yum repolist
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager --nodocs git tar zip unzip which java-1.8.0-openjdk-devel && \
+    yum clean all && \
+    useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave && \
     mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins && \
     curl -fsSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share \
       && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
