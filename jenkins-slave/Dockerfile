@@ -6,13 +6,14 @@ ENV HOME /opt/jenkins-slave
 ENV MAVEN_VERSION 3.3.3
 ENV JAVA_HOME /usr/lib/jvm/java
 
-RUN /usr/bin/yum install -y java-1.8.0-openjdk-devel
-RUN /usr/bin/yum install -y tar
-RUN /usr/bin/yum install -y zip
-RUN /usr/bin/yum install -y unzip
-RUN /usr/bin/yum install -y which
-RUN /usr/bin/yum install -y git
-RUN /usr/bin/yum clean all
+RUN yum update -y
+RUN yum install -y java-1.8.0-openjdk-devel
+RUN yum install -y tar
+RUN yum install -y zip
+RUN yum install -y unzip
+RUN yum install -y which
+RUN yum install -y git
+RUN yum clean all
 RUN useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave
 RUN mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins
 RUN curl -fsSL http://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz | tar xzf - -C /usr/share
