@@ -8,12 +8,12 @@ ENV JAVA_HOME /usr/lib/jvm/java
 
 RUN yum repolist all
 RUN yum repolist
-RUN yum install -y git 
-RUN yum install -y tar 
-RUN yum install -y zip 
-RUN yum install -y unzip 
-RUN yum install -y which
-RUN yum install -y java-1.8.0-openjdk-devel
+RUN "yum install -y git"
+RUN "yum install -y tar"
+RUN "yum install -y zip"
+RUN "yum install -y unzip"
+RUN "yum install -y which"
+RUN "yum install -y java-1.8.0-openjdk-devel"
 RUN yum clean all
 RUN useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave
 RUN mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins
