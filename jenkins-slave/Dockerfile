@@ -6,20 +6,13 @@ ENV HOME /opt/jenkins-slave
 ENV MAVEN_VERSION 3.3.3
 ENV JAVA_HOME /usr/lib/jvm/java
 
-RUN yum repolist all
-RUN yum update -y --nogpgcheck --disableplugin=subscription-manager 
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager java-1.8.0-openjdk-devel
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager  tar
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager zip
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager unzip
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager which
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git
-RUN yum clean all
-RUN useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave
-RUN mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins
-RUN curl -fsSL http://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz | tar xzf - -C /usr/share
-RUN mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven
-RUN ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git tar zip unzip which java-1.8.0-openjdk-devel && \
+    yum clean all && \
+    useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave && \
+    mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins && \
+    curl -fsSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share \
+      && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
+      && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 # Copy script
 COPY jenkins-slave.sh /opt/jenkins-slave/bin/
