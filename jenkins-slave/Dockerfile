@@ -1,5 +1,8 @@
 FROM registry.access.redhat.com/rhel7/rhel
 
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git tar zip unzip which java-1.8.0-openjdk-devel && \
+    yum clean all 
+
 ENV JENKINS_SWARM_VERSION 2.0
 ENV JNLP_SLAVE_VERSION 2.52
 ENV HOME /opt/jenkins-slave
@@ -21,9 +24,6 @@ RUN curl --create-dirs -sSLo /opt/jenkins-slave/bin/swarm-client-$JENKINS_SWARM_
   && chmod -R 775 /opt/jenkins-slave /var/lib/jenkins && \
   chown -R jenkins-slave:root /opt/jenkins-slave /var/lib/jenkins
 
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git tar zip unzip which java-1.8.0-openjdk-devel && \
-    yum clean all 
-    
 WORKDIR /var/lib/jenkins
 
 VOLUME /var/lib/jenkins
