@@ -6,9 +6,7 @@ ENV HOME /opt/jenkins-slave
 ENV MAVEN_VERSION 3.3.3
 ENV JAVA_HOME /usr/lib/jvm/java
 
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git tar zip unzip which java-1.8.0-openjdk-devel && \
-    yum clean all && \
-    useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave && \
+RUN useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave && \
     mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins && \
     curl -fsSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share \
       && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
@@ -23,6 +21,9 @@ RUN curl --create-dirs -sSLo /opt/jenkins-slave/bin/swarm-client-$JENKINS_SWARM_
   && chmod -R 775 /opt/jenkins-slave /var/lib/jenkins && \
   chown -R jenkins-slave:root /opt/jenkins-slave /var/lib/jenkins
 
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git tar zip unzip which java-1.8.0-openjdk-devel && \
+    yum clean all 
+    
 WORKDIR /var/lib/jenkins
 
 VOLUME /var/lib/jenkins

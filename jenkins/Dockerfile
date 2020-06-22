@@ -2,14 +2,6 @@ FROM registry.access.redhat.com/openshift3/jenkins-1-rhel7:1.609-15
 
 ADD config-cloud.xml credentials.xml /opt/openshift/
 
-RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git tar zip unzip which java-1.8.0-openjdk-devel && \
-    yum clean all && \
-    useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave && \
-    mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins && \
-    curl -fsSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share \
-      && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
-      && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
-
 # Install additional plugins and modify files
 RUN mkdir -p /opt/openshift/plugins && \
           cat /opt/openshift/credentials.xml > /opt/openshift/configuration/credentials.xml && \
