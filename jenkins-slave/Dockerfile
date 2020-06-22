@@ -1,5 +1,13 @@
 FROM registry.access.redhat.com/rhel7/rhel
 
+
+RUN rm /etc/rhsm-host && \
+    yum repolist --disablerepo=* && \
+    subscription-manager repos --enable rhel-7-server-ansible-2.9-rpms && \
+    yum -y update && \
+    yum -y install ansible && \
+    rm -rf /etc/pki/entitlement
+    
 RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git tar zip unzip which java-1.8.0-openjdk-devel && \
     yum clean all 
 
