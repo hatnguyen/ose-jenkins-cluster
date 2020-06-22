@@ -7,14 +7,13 @@ ENV MAVEN_VERSION 3.3.3
 ENV JAVA_HOME /usr/lib/jvm/java
 
 RUN yum repolist all
-RUN curl -kv www.google.com
-RUN yum update -y
-RUN yum install -y java-1.8.0-openjdk-devel
-RUN yum install -y tar
-RUN yum install -y zip
-RUN yum install -y unzip
-RUN yum install -y which
-RUN yum install -y git
+RUN yum update -y --nogpgcheck --disableplugin=subscription-manager 
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager java-1.8.0-openjdk-devel
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager  tar
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager zip
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager unzip
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager which
+RUN yum install -y --nogpgcheck --disableplugin=subscription-manager git
 RUN yum clean all
 RUN useradd -u 1001 -r -m -d ${HOME} -s /sbin/nologin -c "Jenkins Slave" jenkins-slave
 RUN mkdir -p /opt/jenkins-slave/bin /var/lib/jenkins
