@@ -57,7 +57,7 @@
 		        { "ip": "${JENKINS_IP}" }
 		      ],
 		      "ports":  [
-		        { "port": 50000, "name": "${JENKINS_SERVICE_NAME}-slave" }
+		        { "port": 37779, "name": "${JENKINS_SERVICE_NAME}-slave" }
 		      ]
 		    }
 		  ]
@@ -73,8 +73,8 @@
 		      {
 		        "name": "${JENKINS_SERVICE_NAME}-slave",
 		        "protocol": "TCP",
-		        "port": 50000,
-		        "targetPort": 50000,
+		        "port": 37779,
+		        "targetPort": 37779,
 		        "nodePort": 0
 		      }
 		    ]
