@@ -93,8 +93,8 @@
                     {
                         "name": "slave",
                         "protocol": "TCP",
-                        "port": 50000,
-                        "targetPort": 50000,
+                        "port": 37779,
+                        "targetPort": 37779,
                         "nodePort": 0
                     }
                 ],
@@ -267,7 +267,7 @@
                                     },
                                     {
                                         "name": "slave",
-                                        "containerPort": 50000,
+                                        "containerPort": 37779,
                                         "protocol": "TCP"
                                     }
                                 ],
