@@ -101,7 +101,7 @@ Settings for the Kubernetes plugin can be configured in the Jenkins global syste
 
 Under the *Cloud* section is a section for **Kubernetes**. A base configuration has been provided with the majority of the configuration necessary to dynamically provision slaves. Addressing to OpenShift components leverages the built in [SkyDNS](https://docs.openshift.com/enterprise/3.1/architecture/additional_concepts/networking.html#openshift-dns) functionality. The Kubernetes plugin communicates with the OpenShift api at *https://openshift.default.svc.cluster.local* using the service account injected into the pod. When using this credential, the additional prerequisite steps described above must have been completed to give the service account the requisite permissions. Alternatively, a user name and password based credential can be used instead of a service account. 
 
-Next, verify the name the Kubernetes namespace (OpenShift project) is correct. *jenkins* is used by default. Then validate and modify as necessary the Jenkins URL and Jenkins tunnel addresses. These addresses map to the two services that have been defined for the project (jenkins pointing at port 8080 for API and 50000 for slave connections) These URL's take the following form:
+Next, verify the name the Kubernetes namespace (OpenShift project) is correct. *jenkins* is used by default. Then validate and modify as necessary the Jenkins URL and Jenkins tunnel addresses. These addresses map to the two services that have been defined for the project (jenkins pointing at port 8080 for API and 37779 for slave connections) These URL's take the following form:
 
     <app_name>.<namespace>.svc.cluster.local:<port>
     
