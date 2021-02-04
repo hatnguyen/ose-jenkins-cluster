@@ -18,7 +18,7 @@
       <skipTlsVerify>true</skipTlsVerify>
       <namespace>jenkins</namespace>
       <jenkinsUrl>http://jenkins.jenkins.svc.cluster.local:8080</jenkinsUrl>
-      <jenkinsTunnel>jenkins-slave.jenkins.svc.cluster.local:50000</jenkinsTunnel>
+      <jenkinsTunnel>jenkins-slave.jenkins.svc.cluster.local:37779</jenkinsTunnel>
       <credentialsId>kubernetes</credentialsId>
       <containerCap>10</containerCap>
       <retentionTimeout>5</retentionTimeout>
